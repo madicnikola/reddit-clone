@@ -1,11 +1,13 @@
 package fon.njt.redditclone.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.Instant;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
