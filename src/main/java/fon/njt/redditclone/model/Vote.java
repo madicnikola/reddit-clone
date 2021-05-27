@@ -2,11 +2,13 @@ package fon.njt.redditclone.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -18,9 +20,9 @@ public class Vote {
     private VoteType voteType;
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "postID", referencedColumnName = "postID")
+    @JoinColumn(name = "postId", referencedColumnName = "postId")
     private Post post;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userID", referencedColumnName = "userID")
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
 }
