@@ -3,11 +3,13 @@ package fon.njt.redditclone.model;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.Instant;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -19,10 +21,10 @@ public class Comment {
     @NotNull
     private String text;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "postID", referencedColumnName = "postID")
+    @JoinColumn(name = "postId", referencedColumnName = "postId")
     private Post post;
     private Instant createdDate;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userID", referencedColumnName = "userID")
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
 }

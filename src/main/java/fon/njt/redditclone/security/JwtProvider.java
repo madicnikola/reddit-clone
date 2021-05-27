@@ -3,6 +3,8 @@ package fon.njt.redditclone.security;
 import fon.njt.redditclone.exceptions.SpringRedditException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
@@ -12,13 +14,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.*;
 import java.security.cert.CertificateException;
+import java.time.Instant;
+import java.util.Date;
 
 import static io.jsonwebtoken.Jwts.parser;
 
+@Data
 @Service
 public class JwtProvider {
 
     private KeyStore keyStore;
+
+    @Value("${jwt.expiration.time}")
+    private Long jwtExpirationMillis;
 
     @PostConstruct
     public void init() {
@@ -35,6 +43,16 @@ public class JwtProvider {
         User principal = (User) authentication.getPrincipal();
         return Jwts.builder().setSubject(principal.getUsername())
                 .signWith(getPrivateKey())
+                .setExpiration(Date.from(Instant.now().plusMillis(jwtExpirationMillis)))
+                .compact();
+    }
+
+    public String generateTokenWithUserName(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(Date.from(Instant.now()))
+                .signWith(getPrivateKey())
+                .setExpiration(Date.from(Instant.now().plusMillis(jwtExpirationMillis)))
                 .compact();
     }
 
@@ -53,7 +71,7 @@ public class JwtProvider {
 
     private PublicKey getPublicKey() {
         try {
-            return (PublicKey) keyStore.getCertificate("springblog").getPublicKey();
+            return keyStore.getCertificate("springblog").getPublicKey();
         } catch (KeyStoreException e) {
             e.printStackTrace();
             throw new SpringRedditException("Exception occurred while retrieving private key from keystore");
