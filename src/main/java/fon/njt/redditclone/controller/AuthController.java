@@ -51,19 +51,4 @@ public class AuthController {
         return ResponseEntity.status(OK).body("Refresh token Deleted Successfully!");
     }
 
-
-//    @GetMapping("/signup")
-//    public String signUpTest() {
-//        return "It's working!";
-//    }
-//
-//    @GetMapping("/hello")
-//    public String hello() {
-//        return "Hello!";
-//    }
-//
-//    @GetMapping("/test")
-//    public String testBuild() {
-//        return "Build is working";
-//    }
 }

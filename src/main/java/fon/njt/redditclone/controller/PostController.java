@@ -2,10 +2,6 @@ package fon.njt.redditclone.controller;
 
 import fon.njt.redditclone.dto.PostRequest;
 import fon.njt.redditclone.dto.PostResponse;
-import fon.njt.redditclone.exceptions.SubredditNotFoundException;
-import fon.njt.redditclone.mapper.PostMapper;
-import fon.njt.redditclone.repository.SubredditRepository;
-import fon.njt.redditclone.service.AuthService;
 import fon.njt.redditclone.service.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,7 +29,7 @@ public class PostController {
         return status(HttpStatus.OK).body(postService.getPost(id));
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<List<PostResponse>> getAllPosts() {
         return status(HttpStatus.OK).body(postService.getAllPosts());
     }

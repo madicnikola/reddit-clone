@@ -2,9 +2,9 @@ package fon.njt.redditclone.service;
 
 import fon.njt.redditclone.exceptions.SpringRedditException;
 import fon.njt.redditclone.model.NotificationEmail;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +14,23 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 @Service
-@AllArgsConstructor
 @Slf4j
 public class MailService {
-    private final JavaMailSender mailSender;
+
+    private final String username;
+    private final String password;
     private final MailContentBuilder mailContentBuilder;
+
+
+    @Autowired
+    public MailService(  @Value("${spring.mail.username}") String username, @Value("${spring.mail.password}") String password, MailContentBuilder mailContentBuilder) {
+        this.username = username;
+        this.password = password;
+        this.mailContentBuilder = mailContentBuilder;
+    }
 
     @Async
     public void sendMail(NotificationEmail notificationEmail) {
-        final String username = "";
-        final String password = "";
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");

@@ -1,12 +1,10 @@
 package fon.njt.redditclone.service;
 
-import fon.njt.redditclone.dto.PostResponse;
 import fon.njt.redditclone.dto.VoteDto;
 import fon.njt.redditclone.exceptions.PostNotFoundException;
 import fon.njt.redditclone.exceptions.SpringRedditException;
 import fon.njt.redditclone.model.Post;
 import fon.njt.redditclone.model.Vote;
-import fon.njt.redditclone.model.VoteType;
 import fon.njt.redditclone.repository.PostRepository;
 import fon.njt.redditclone.repository.VoteRepository;
 import lombok.AllArgsConstructor;

@@ -13,7 +13,6 @@ import fon.njt.redditclone.repository.UserRepository;
 import fon.njt.redditclone.repository.VerificationTokenRepository;
 import fon.njt.redditclone.security.JwtProvider;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,7 +28,6 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-
 public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
